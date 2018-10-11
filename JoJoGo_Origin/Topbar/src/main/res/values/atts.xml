@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="Topbar">
+        <attr name="title" format="string"/>
+        <attr name="titleTextSize" format="dimension"/>
+        <attr name="titleTextColor" format="color"/>
+        <attr name="leftTextColor" format="color"/>
+        <attr name="leftBackground" format="color|reference"/>
+        <attr name="leftText" format="string"/>
+        <attr name="rightTextColor" format="color"/>
+        <attr name="rightBackground" format="color|reference"/>
+        <attr name="rightText" format="string" tools:ignore="DuplicateDefinition" />
+
+    </declare-styleable>
+    <declare-styleable name="Goods">
+        <attr name="bt1" format="string"/>
+        <attr name="bt1TextColor" format="color"/>
+        <attr name="bt1Background" format="color|reference"/>
+        <attr name="name" format="string"/>
+        <attr name="nameTextSize" format="dimension"/>
+        <attr name="nameTextColor" format="color"/>
+        <attr name="image" format="reference"/>
+        <attr name="price" format="string"/>
+        <attr name="priceTextSize" format="dimension"/>
+        <attr name="priceTextColor" format="color"/>
+        <attr name="amount" format="string"/>
+        <attr name="amountTextSize" format="dimension"/>
+        <attr name="amountTextColor" format="color"/>
+    </declare-styleable>
+</resources>
