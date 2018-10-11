@@ -27,7 +27,7 @@
 
     <RadioGroup
         android:layout_width="match_parent"
-
+        android:id="@+id/radioGroup"
         android:layout_height="37dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/topbar"
@@ -82,7 +82,29 @@
 
     </RadioGroup>
 
+    <com.wenjor.topbar.Goods
+        android:id="@+id/goods1"
+        android:layout_width="match_parent"
+        android:layout_height="151dp"
+        android:layout_below="@+id/radioGroup"
+        custom:bt1="编辑"
+        custom:bt1Background="#66b2e1"
+        custom:bt1TextColor="#FFFFFF"
+        custom:bt1TextSize="8sp"
+        custom:image="@mipmap/jin"
+        custom:name="Jin"
+        custom:nameTextColor="#000000"
+        custom:nameTextSize="10sp"
+        custom:price="$2E"
+        custom:priceTextColor="#000000"
+        custom:priceTextSize="9sp"
+        custom:amount="X1"
+        custom:amountTextColor="#000000"
+        custom:amountTextSize="9sp"
 
+        >
+
+    </com.wenjor.topbar.Goods>
 
 
 </RelativeLayout>

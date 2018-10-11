@@ -93,7 +93,7 @@ import android.widget.Toast;
         addView(tvTitle,titleParams);
 
 //        titleParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-//        titleParams.addRule(RelativeLayout.RIGHT_OF,44);
+//        titleParams.addRule(RelativeLayout.LEFT_OF,33);
 //                addView(tvTitle,titleParams);
 
         leftButton.setOnClickListener(new OnClickListener() {

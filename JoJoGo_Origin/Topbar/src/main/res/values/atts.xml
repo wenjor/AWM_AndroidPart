@@ -15,6 +15,7 @@
     <declare-styleable name="Goods">
         <attr name="bt1" format="string"/>
         <attr name="bt1TextColor" format="color"/>
+        <attr name="bt1TextSize" format="dimension"/>
         <attr name="bt1Background" format="color|reference"/>
         <attr name="name" format="string"/>
         <attr name="nameTextSize" format="dimension"/>
