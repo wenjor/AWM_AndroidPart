@@ -113,7 +113,8 @@ public class Goods extends RelativeLayout {
         addView(price,priceP);
 
         amountP = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        amountP.addRule(RIGHT_OF,4);
+        //amountP.addRule(RIGHT_OF,4);
+        amountP.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         amountP.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         addView(amount,amountP);
 
