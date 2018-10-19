@@ -16,7 +16,7 @@
         custom:rightBackground="@color/colorAccent"
         custom:rightText="More"
         custom:rightTextColor="#FFFFFF"
-        custom:title="注册"
+        custom:title="登陆"
         custom:titleTextColor="#123412"
         custom:titleTextSize="8sp"
         />
@@ -30,7 +30,8 @@
         android:layout_marginTop="112dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+
+        android:hint="Username"/>
 
     <EditText
         android:id="@+id/editText5"
@@ -40,16 +41,26 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="192dp"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
+        android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="237dp"
-        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="19dp"
         android:text="Forget Password" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="147dp"
+        android:layout_height="63dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="234dp"
+        android:text="Login" />
 
 </RelativeLayout>

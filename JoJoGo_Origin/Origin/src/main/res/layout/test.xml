@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom= "http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,6 +11,7 @@
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="44dp"
+        android:gravity=""
         custom:leftBackground="@color/colorAccent"
         custom:leftText="Back"
         custom:leftTextColor="#FFFFFF"
@@ -28,28 +29,29 @@
 
 
     <com.wenjor.topbar.Goods
-        android:id="@+id/goods1"
-        android:layout_width="match_parent"
-        android:layout_height="151dp"
-        android:layout_below="@+id/topbar"
-        custom:bt1="编辑"
-        custom:bt1Background="#66b2e1"
-        custom:bt1TextColor="#FFFFFF"
-        custom:bt1TextSize="8sp"
-        custom:image="@mipmap/jin"
-        custom:name="Jin"
-        custom:nameTextColor="#000000"
-        custom:nameTextSize="10sp"
-        custom:price="$2E"
-        custom:priceTextColor="#000000"
-        custom:priceTextSize="9sp"
-        custom:amount="X1"
-        custom:amountTextColor="#000000"
-        custom:amountTextSize="9sp"
+            android:id="@+id/goods1"
+            android:layout_width="match_parent"
+            android:layout_height="151dp"
+            custom:bt1="编辑"
+            custom:bt1Background="#66b2e1"
+            custom:bt1TextColor="#FFFFFF"
+            custom:bt1TextSize="8sp"
+            custom:image="@mipmap/jin"
+            custom:name="Jin"
+            custom:nameTextColor="#000000"
+            custom:nameTextSize="10sp"
+            custom:price="$2E"
+            custom:priceTextColor="#000000"
+            custom:priceTextSize="9sp"
+            custom:amount="X1"
+            custom:amountTextColor="#000000"
+            custom:amountTextSize="9sp"
 
-        >
+            >
 
     </com.wenjor.topbar.Goods>
 
 
-</RelativeLayout>
+
+
+</LinearLayout>

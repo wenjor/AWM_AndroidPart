@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 
             }
         });
-        topbar.setLeftIsvisable(false);
+        topbar.setLeftIsvisable(true);
         topbar.setrightIsvisable(false);
     }
 
