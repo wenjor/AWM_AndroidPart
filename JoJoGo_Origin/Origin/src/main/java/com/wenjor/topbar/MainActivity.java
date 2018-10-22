@@ -29,6 +29,13 @@ public class MainActivity extends Activity {
                 startActivity(intent1);
             }
         });
+        bt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Goods_manager.class);
+                startActivity(intent);
+            }
+        });
         topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
             @Override
             public void leftClick() {
@@ -37,11 +44,13 @@ public class MainActivity extends Activity {
 
             @Override
             public void rightClick() {
+                Intent intent = new Intent(MainActivity.this,Store_Information.class);
+                startActivity(intent);
 
             }
         });
         topbar.setLeftIsvisable(true);
-        topbar.setrightIsvisable(false);
+        topbar.setrightIsvisable(true);
     }
 
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
->
+    >
     <com.wenjor.topbar.Topbar
         android:id="@+id/topbar"
         android:layout_width="match_parent"
@@ -16,68 +16,61 @@
         custom:rightBackground="@color/colorAccent"
         custom:rightText="More"
         custom:rightTextColor="#FFFFFF"
-        custom:title="编辑商品"
+        custom:title="店铺信息"
         custom:titleTextColor="#123412"
         custom:titleTextSize="8sp"
         />
 
-    <ImageView
-        android:id="@+id/imageView"
+    <ImageButton
+        android:id="@+id/imageButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="75dp"
-        android:src="@mipmap/jin" />
+        android:layout_marginTop="77dp"
+        custom:srcCompat="@mipmap/activity" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editText7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="227dp"
+        android:layout_marginBottom="229dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Name" />
+        android:hint="Jody's Corner" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editText11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="160dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Price" />
+        android:hint="Addr" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/editText12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-150dp"
+        android:layout_marginBottom="80dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Stock" />
+        android:hint="181xxxxxxx" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="236dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="37dp"
-        android:text="Save" />
-
-    <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="32dp"
-        android:text="Supply" />
+        android:layout_marginBottom="14dp"
+        android:layout_marginEnd="39dp"
+        android:text="Confirm" />
+
 </RelativeLayout>

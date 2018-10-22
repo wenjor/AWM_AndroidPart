@@ -107,5 +107,18 @@
         android:textColor="#FFFFFF"
         android:textSize="11sp" />
 
+    <Button
+        android:id="@+id/detail"
+        android:layout_width="69dp"
+        android:layout_height="23dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="100dp"
+        android:layout_marginTop="153dp"
+        android:background="#A6A6A6"
+        android:text="明细"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"/>
+
 
 </RelativeLayout>

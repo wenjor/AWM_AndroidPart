@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class Order_m extends RelativeLayout {
     private TextView uname,tel,addr,orderTime,orderNum,price,turn;
-    private Button confirm;
+    private Button confirm,detail;
     private ImageButton call;
     public Order_m(Context context){
         super(context);
@@ -26,8 +26,10 @@ public class Order_m extends RelativeLayout {
         orderTime = (TextView)findViewById(R.id.textView6);
         orderNum = (TextView)findViewById(R.id.textView7);
         price = (TextView)findViewById(R.id.price);
-        confirm = (Button)findViewById(R.id.button7);
         turn = (TextView)findViewById(R.id.turn);
+
+        confirm = (Button)findViewById(R.id.button7);
+        detail = (Button)findViewById(R.id.detail);
         call = (ImageButton)findViewById(R.id.imageButton);
 
     }
@@ -47,7 +49,10 @@ public class Order_m extends RelativeLayout {
     public void setOnclickConfirm(OnClickListener listener){
         confirm.setOnClickListener(listener);
     }
-    
+
+    public void setOnclickDetail(OnClickListener listener){
+        detail.setOnClickListener(listener);
+    }
     public void setOnclickCall(OnClickListener listener){
         call.setOnClickListener(listener);
     }

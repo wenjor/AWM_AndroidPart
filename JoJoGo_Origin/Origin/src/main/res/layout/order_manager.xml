@@ -89,29 +89,7 @@
 
     </RadioGroup>
 
-    <com.wenjor.topbar.Goods
-        android:id="@+id/goods1"
-        android:layout_width="match_parent"
-        android:layout_height="151dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/order_m1"
-        custom:amount="X1"
-        custom:amountTextColor="#000000"
-        custom:amountTextSize="13sp"
-        custom:bt1="编辑"
-        custom:bt1Background="#66b2e1"
-        custom:bt1TextColor="#FFFFFF"
-        custom:bt1TextSize="8sp"
-        custom:image="@mipmap/jin"
-        custom:name="Jin"
-        custom:nameTextColor="#000000"
-        custom:nameTextSize="12sp"
 
-        custom:price="$2 biliion"
-        custom:priceTextColor="#FF4848"
-        custom:priceTextSize="11sp">
-
-    </com.wenjor.topbar.Goods>
 
 
 </RelativeLayout>
