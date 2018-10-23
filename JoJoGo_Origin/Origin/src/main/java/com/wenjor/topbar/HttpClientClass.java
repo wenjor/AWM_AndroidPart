@@ -1,4 +1,5 @@
 package com.wenjor.topbar;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -43,26 +44,33 @@ public class HttpClientClass extends Thread {
     String result = null;
     private Handler handle;
     Map<String, Object> map = new LinkedHashMap<String, Object>();
-
+    URL realUrl;
 
     /**
      * @author gw00093437 dhj 2017.1.10
      * @param url
-     *            接口地址
+     *            接口地址
      * @param requestStyle
-     *            请求类型GET\POST
+     *            请求类型GET\POST
      * @param dataStyle
-     *            数据提交方式FORM\JSON
+     *            数据提交方式FORM\JSON
      * @param map
-     *            数据源供转化解析
+     *            数据源供转化解析
      * @param handle
      * 返回数据的存储
      */
     public HttpClientClass(String url, String requestStyle, String dataStyle,
-                           Map map,Handler handle) {
+                           Map map,Handler handle) throws Exception {
         this.requestStyle = requestStyle;
         this.dataStyle = dataStyle;
         this.url = url;
+        try {
+            this.realUrl = new URL(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        if("https".equalsIgnoreCase(realUrl.getProtocol())){
+            com.wenjor.topbar.SslUtils.ignoreSsl();}
         this.map = map;
         this.handle=handle;
     }
@@ -100,17 +108,19 @@ public class HttpClientClass extends Thread {
 
             try {
                 HttpResponse response=httpclient.execute(get);
-                in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                StringBuffer sb = new StringBuffer("");
-                String line = "";
-                String NL = System.getProperty("line.separator");
-                while ((line = in.readLine()) != null) {
-                    sb.append(line + NL); }
-                    in.close();
-                content = sb.toString();
+                in = new BufferedReader(new InputStreamReader(response.getEntity()  
+                                           .getContent()));  
+           StringBuffer sb = new StringBuffer("");  
+           String line = "";  
+           String NL = System.getProperty("line.separator");  
+           while ((line = in.readLine()) != null) {  
+               sb.append(line + NL);  
+           }  
+           in.close();  
+           content = sb.toString();
                 Message msg = new Message();
-                msg.obj= content;
-                handle.sendMessage(msg);
+                    msg.obj= content;
+                    handle.sendMessage(msg);
             } catch (ClientProtocolException e) {
 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -153,10 +163,13 @@ public class HttpClientClass extends Thread {
                     response = httpclient.execute(post);
                 } catch (IOException e) {
 // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    e.printStackTrace();//System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
                 }
-                if (response.getStatusLine().getStatusCode() == 200) {
+                //System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+                if(response!=null)
+                    if (response.getStatusLine().getStatusCode() == 200) {
 // 第五步：从相应对象当中取出数据，放到entity当中
+                    System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
                     HttpEntity entity = response.getEntity();
                     BufferedReader reader = null;
                     try {
@@ -172,9 +185,9 @@ public class HttpClientClass extends Thread {
 
                     try {
                         result = reader.readLine();
-                        Message msg = new Message();
-                        msg.obj= result;
-                        handle.sendMessage(msg);
+ Message msg = new Message();
+                          msg.obj= result;
+                          handle.sendMessage(msg);
                     } catch (IOException e) {
 // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -228,7 +241,7 @@ public class HttpClientClass extends Thread {
 
                     try {
                         result = reader.readLine();
-                        Message msg = new Message();
+ Message msg = new Message();
                         msg.obj= result;
                         handle.sendMessage(msg);
                     } catch (IOException e) {

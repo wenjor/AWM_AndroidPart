@@ -2,6 +2,7 @@ package com.wenjor.topbar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +10,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class MainActivity extends Activity {
     private Button bt1,bt2,bt3;
+    private HttpClientClass httpclient;
+    private Handler handle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +43,18 @@ public class MainActivity extends Activity {
         topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
             @Override
             public void leftClick() {
-                Toast.makeText(MainActivity.this,"On building",Toast.LENGTH_SHORT).show();
+//                String st = "https://nightwing.top/customer/login";
+//                Map<String,Object>map = new LinkedHashMap<String, Object>();
+//
+//                map.put("tel","17646547957");
+//                map.put("password", "B000BQ2HR2");
+//
+//                httpclient = new HttpClientClass(st,"POST","JSON",map,handle);
+//                Toast.makeText(MainActivity.this,"On building",Toast.LENGTH_SHORT).show();
+//                httpclient.start();
+               Intent intent = new Intent(MainActivity.this,Login.class);
+               startActivity(intent);
+                // Toast.makeText(MainActivity.this,"On building",Toast.LENGTH_SHORT).show();
             }
 
             @Override

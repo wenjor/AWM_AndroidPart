@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wenjor.topbar">
-
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,6 +24,9 @@
         <activity android:name=".Goods_edit"/>
         <activity android:name=".Store_Information"/>
         <activity android:name=".LabelManager"/>
+        <activity android:name=".Login"
+            android:exported="true" />
+
     </application>
 
 </manifest>
