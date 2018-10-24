@@ -163,10 +163,10 @@ public class HttpClientClass extends Thread {
                     response = httpclient.execute(post);
                 } catch (IOException e) {
 // TODO Auto-generated catch block
-                    e.printStackTrace();//System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+                    e.printStackTrace();System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
                 }
                 //System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
-                if(response!=null)
+                //if(response!=null)
                     if (response.getStatusLine().getStatusCode() == 200) {
 // 第五步：从相应对象当中取出数据，放到entity当中
                     System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
@@ -185,12 +185,14 @@ public class HttpClientClass extends Thread {
 
                     try {
                         result = reader.readLine();
- Message msg = new Message();
-                          msg.obj= result;
-                          handle.sendMessage(msg);
+                        System.out.println("Here is result"+result);
+                        Message msg = new Message();
+                        msg.obj= result;
+                        handle.sendMessage(msg);
                     } catch (IOException e) {
 // TODO Auto-generated catch block
                         e.printStackTrace();
+                        System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
                     }
                     Log.d("dhj", "POST_JSON:" + result);
                 }

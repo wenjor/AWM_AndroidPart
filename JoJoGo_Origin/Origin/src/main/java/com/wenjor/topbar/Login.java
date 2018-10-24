@@ -29,11 +29,11 @@ public class Login extends Activity {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String st = "https://nightwing.top/shop/login";
+                String st = "http://nightwing.top:8080/customer/login";
                 Map<String,Object>map = new LinkedHashMap<String, Object>();
 
-                map.put("tel","17646547957");
-                map.put("password", "B000BQ2HR2");
+                map.put("tel","17649201504");
+                map.put("password", "B000A6Y8AW");
 
                 try {
                     httpclient = new HttpClientClass(st,"POST","JSON",map,handle);

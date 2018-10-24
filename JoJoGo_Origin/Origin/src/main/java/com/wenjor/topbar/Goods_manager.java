@@ -28,6 +28,7 @@ public class Goods_manager extends Activity {
             }
         });
         Goods_type2 good = findViewById(R.id.goods1);
+
         good.setOnclickEdit(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,6 +36,7 @@ public class Goods_manager extends Activity {
                 startActivity(intent);
             }
         });
+        good.setImage(getResources().getDrawable(R.drawable.jin));
 
     }
 }
