@@ -153,7 +153,7 @@ public class HttpClientClass extends Thread {
                     jsonentity = new StringEntity(jsonParam.toString(), "utf-8");
                 } catch (UnsupportedEncodingException e1) {
 // TODO Auto-generated catch block
-                    e1.printStackTrace();
+                    e1.printStackTrace();System.out.println("TTTTTTTTTTTTTTTTTTTT");
                 }// 解决中文乱码问题
                 jsonentity.setContentEncoding("UTF-8");
                 jsonentity.setContentType("application/json");
@@ -188,6 +188,7 @@ public class HttpClientClass extends Thread {
                         System.out.println("Here is result"+result);
                         Message msg = new Message();
                         msg.obj= result;
+                        System.out.println("Here is Message"+msg.obj);
                         handle.sendMessage(msg);
                     } catch (IOException e) {
 // TODO Auto-generated catch block
