@@ -2,7 +2,9 @@ package com.wenjor.topbar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +18,24 @@ import java.util.Map;
 public class MainActivity extends Activity {
     private Button bt1,bt2,bt3;
     private HttpClientClass httpclient;
-    private Handler handle;
+    private Handler handle= new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    SharedPreferences sp = getSharedPreferences("token",Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    // Map<String,Object>map = (Map<String,Object>)msg.obj;
+                    String a=(String)(msg.obj);String b[] = a.split("\"msg\":\"success\",\"code\":0,\"data\":\"",2);String c[] = b[1].split("\\}",2);
+                    System.out.println("DDDDDDDDDDDDDDDD"+c[0]);
+                    editor.putString("data",c[0]);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +80,7 @@ public class MainActivity extends Activity {
             public void rightClick() {
                 Intent intent = new Intent(MainActivity.this,Store_Information.class);
                 startActivity(intent);
+
 
             }
         });

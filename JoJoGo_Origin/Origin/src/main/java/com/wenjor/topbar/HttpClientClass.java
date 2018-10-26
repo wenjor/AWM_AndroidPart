@@ -32,6 +32,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -44,7 +46,6 @@ public class HttpClientClass extends Thread {
     String result = null;
     private Handler handle;
     Map<String, Object> map = new LinkedHashMap<String, Object>();
-    URL realUrl;
 
     /**
      * @author gw00093437 dhj 2017.1.10
@@ -64,13 +65,6 @@ public class HttpClientClass extends Thread {
         this.requestStyle = requestStyle;
         this.dataStyle = dataStyle;
         this.url = url;
-        try {
-            this.realUrl = new URL(url);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        if("https".equalsIgnoreCase(realUrl.getProtocol())){
-            com.wenjor.topbar.SslUtils.ignoreSsl();}
         this.map = map;
         this.handle=handle;
     }
@@ -120,6 +114,7 @@ public class HttpClientClass extends Thread {
            content = sb.toString();
                 Message msg = new Message();
                     msg.obj= content;
+                    if(handle!=null)
                     handle.sendMessage(msg);
             } catch (ClientProtocolException e) {
 // TODO Auto-generated catch block
@@ -189,7 +184,9 @@ public class HttpClientClass extends Thread {
                         Message msg = new Message();
                         msg.obj= result;
                         System.out.println("Here is Message"+msg.obj);
+                        if(handle!=null)
                         handle.sendMessage(msg);
+                        //handle.obtainMessage(msg);
                     } catch (IOException e) {
 // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -246,7 +243,11 @@ public class HttpClientClass extends Thread {
                         result = reader.readLine();
  Message msg = new Message();
                         msg.obj= result;
+                        if(handle!=null)
                         handle.sendMessage(msg);
+//                        if(url=="http://nightwing.top:8080/shop/login"){
+//                            SharedPreferences mySP = getAcgetSharedPreferences("token", Activity.MODE_PRIVATE);
+//                        }
                     } catch (IOException e) {
 // TODO Auto-generated catch block
                         e.printStackTrace();
