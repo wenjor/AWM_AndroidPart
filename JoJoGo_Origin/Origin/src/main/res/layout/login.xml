@@ -48,10 +48,19 @@
         android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/forget2"
+        android:layout_marginBottom="35dp"
+        android:text="Forget Password" />
+
+    <Button
+        android:id="@+id/forget2"
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="100dp"
         android:layout_marginEnd="19dp"
-        android:text="Forget Password" />
+        android:text="Regist" />
 
     <Button
         android:id="@+id/post"

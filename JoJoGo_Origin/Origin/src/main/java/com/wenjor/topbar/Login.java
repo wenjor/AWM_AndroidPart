@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class Login extends Activity {
     private TextView uname,password;
-    private Button post,forget;
+    private Button post,forget,regist;
     private Handler handle= new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -58,6 +58,8 @@ public class Login extends Activity {
         password = findViewById(R.id.password);
         post = findViewById(R.id.post);
         forget = findViewById(R.id.forget);
+        regist = findViewById(R.id.forget2);
+
 
         a= uname.getText().toString();
         b=password.getText().toString();
@@ -84,6 +86,7 @@ public class Login extends Activity {
                 String name = sp.getString("name","");
                 System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA"+name);
                 Toast.makeText(Login.this, "读取数据如下："+"\n"+"data：" + data ,Toast.LENGTH_LONG).show();
+                finish();
             }
         });
     }

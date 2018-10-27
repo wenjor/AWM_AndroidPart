@@ -7,13 +7,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends Activity {
     private Button bt1,bt2,bt3;
@@ -24,18 +28,67 @@ public class MainActivity extends Activity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0:
-                    SharedPreferences sp = getSharedPreferences("token",Activity.MODE_PRIVATE);
+                    SharedPreferences sp = getSharedPreferences("shopInf",Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
-                    // Map<String,Object>map = (Map<String,Object>)msg.obj;
-                    String a=(String)(msg.obj);String b[] = a.split("\"msg\":\"success\",\"code\":0,\"data\":\"",2);String c[] = b[1].split("\\}",2);
-                    System.out.println("DDDDDDDDDDDDDDDD"+c[0]);
-                    editor.putString("data",c[0]);
+                    Gson gson=new Gson();
+                    String json = gson.toJson(msg.obj);
+
+//                      Map<String,Object> map = new HashMap<String,Object>();
+//                    map = gson.fromJson((String)msg.obj,map.getClass());
+//                    Set<Map.Entry<String,Object>> set =map.entrySet();
+//                    for(Map.Entry<String,Object> me :set){
+//                        if(me.getValue() instanceof String)
+//                            editor.putString(me.getKey(),(String)me.getValue());
+//                        else if(me.getValue() instanceof Double)
+//                            editor.putFloat(me.getKey(),(float) ((Double) me.getValue()).doubleValue());
+//                    }
+//                    String tokenid =(String)map.get("data");
+//                    System.out.println("DDDDDDDDDDDDDDDD"+tokenid.getClass());
+//                    editor.putString("data",tokenid);
+//                    editor.putString("name","wenjor");
+                    Log.d("TAG", "saved json is "+ json);
+                    editor.putString("alterShopInf",json);
+                    editor.commit();
                     break;
                 default:
                     break;
             }
         }
     };
+    private Handler handle2= new Handler(){
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    SharedPreferences sp = getSharedPreferences("GoodManager", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(msg.obj);
+
+//                      Map<String,Object> map = new HashMap<String,Object>();
+//                    map = gson.fromJson((String)msg.obj,map.getClass());
+//                    Set<Map.Entry<String,Object>> set =map.entrySet();
+//                    for(Map.Entry<String,Object> me :set){
+//                        if(me.getValue() instanceof String)
+//                            editor.putString(me.getKey(),(String)me.getValue());
+//                        else if(me.getValue() instanceof Double)
+//                            editor.putFloat(me.getKey(),(float) ((Double) me.getValue()).doubleValue());
+//                    }
+//                    String tokenid =(String)map.get("data");
+//                    System.out.println("DDDDDDDDDDDDDDDD"+tokenid.getClass());
+//                    editor.putString("data",tokenid);
+//                    editor.putString("name","wenjor");
+                    Log.d("TAG", "saved json is " + json);
+                    editor.putString("alterGoodInf", json);
+                    editor.commit();
+                    break;
+                default:
+                    break;
+                }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +108,14 @@ public class MainActivity extends Activity {
         bt3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String st = "http://nightwing.top:8080/shop/dishes/1";
+                Map<String,Object>map = new LinkedHashMap<String, Object>();
+                try{
+                    httpclient = new HttpClientClass(st,"GET","JSON",map,handle2);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                httpclient.start();
                 Intent intent = new Intent(MainActivity.this,Goods_manager.class);
                 startActivity(intent);
             }
@@ -78,6 +139,14 @@ public class MainActivity extends Activity {
 
             @Override
             public void rightClick() {
+                String st = "http://nightwing.top:8080/shop/1?id=1";
+                Map<String,Object>map = new LinkedHashMap<String, Object>();
+                try{
+                    httpclient = new HttpClientClass(st,"GET","JSON",map,handle);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                httpclient.start();
                 Intent intent = new Intent(MainActivity.this,Store_Information.class);
                 startActivity(intent);
 
