@@ -32,8 +32,19 @@ public class Store_Information extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.store_information);
         Topbar topbar =findViewById(R.id.topbar);
-        topbar.setLeftIsvisable(false);
+        topbar.setLeftIsvisable(true);
         topbar.setrightIsvisable(false);
+        topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
+            @Override
+            public void leftClick() {
+                finish();
+            }
+
+            @Override
+            public void rightClick() {
+
+            }
+        });
 
         SharedPreferences sp = getSharedPreferences("shopInf",MODE_PRIVATE);
         String json = sp.getString("alterShopInf",null);

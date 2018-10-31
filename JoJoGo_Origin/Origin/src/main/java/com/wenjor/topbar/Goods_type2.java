@@ -14,8 +14,8 @@ public class Goods_type2 extends RelativeLayout {
     private TextView name,price,amount;
     private Button bt1,bt2;
     private ImageView image;
-    public Goods_type2(Context context, AttributeSet attrs){
-        super(context,attrs);
+    public Goods_type2(Context context){//, AttributeSet attrs){
+        super(context);//,attrs);
         LayoutInflater.from(context).inflate(R.layout.goods_type2,this);
         name = findViewById(R.id.name);
         price = findViewById(R.id.price);
@@ -24,6 +24,9 @@ public class Goods_type2 extends RelativeLayout {
         bt2 = findViewById(R.id.button2);
         image =findViewById(R.id.imageView2);
     }
+
+
+
     public void setGood(String n,String p,String a){
         name.setText(n);
         price.setText(p);

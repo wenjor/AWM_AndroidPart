@@ -45,6 +45,7 @@ public class HttpClientClass extends Thread {
     private String url;
     String result = null;
     private Handler handle;
+    private Map headers;
     Map<String, Object> map = new LinkedHashMap<String, Object>();
 
     /**
@@ -61,12 +62,13 @@ public class HttpClientClass extends Thread {
      * 返回数据的存储
      */
     public HttpClientClass(String url, String requestStyle, String dataStyle,
-                           Map map,Handler handle) throws Exception {
+                           Map map,Handler handle, Map headers) throws Exception {
         this.requestStyle = requestStyle;
         this.dataStyle = dataStyle;
         this.url = url;
         this.map = map;
-        this.handle=handle;
+        this.handle = handle;
+        this.headers = headers;
     }
 
 
@@ -78,19 +80,22 @@ public class HttpClientClass extends Thread {
         if (requestStyle.equals("GET")) {
 // GET方式
             String param="";
-            Iterator it = map.keySet().iterator();
+
             String key;
             String value;
             HttpGet get;
-            while (it.hasNext()) {
-                key = it.next().toString();
-                value = (String) map.get(key);
-                if(param==""){
-                    param=key+"="+value;
-                }else{
-                    param=param+"&"+key+"="+value;
-                }
+            if (map != null) {
+                Iterator it = map.keySet().iterator();
+                while (it.hasNext()) {
+                    key = it.next().toString();
+                    value = (String) map.get(key);
+                    if (param == "") {
+                        param = key + "=" + value;
+                    } else {
+                        param = param + "&" + key + "=" + value;
+                    }
 
+                }
             }
             BufferedReader in = null;
             String content=null;
@@ -98,6 +103,14 @@ public class HttpClientClass extends Thread {
                 get = new HttpGet(url);
             }else{
                 get = new HttpGet(url+"?"+param);
+            }
+            if (headers != null) {
+                Iterator it1 = headers.keySet().iterator();
+                while (it1.hasNext()) {
+                    key = it1.next().toString();
+                    value = (String) headers.get(key);
+                    get.setHeader(key, value);
+                }
             }
 
             try {
@@ -130,17 +143,28 @@ public class HttpClientClass extends Thread {
             if (dataStyle.equals("JSON")) {
 // json数据类型进行提交
                 JSONObject jsonParam = new JSONObject();
-                Iterator it = map.keySet().iterator();
                 String key;
                 String value;
-                while (it.hasNext()) {
-                    key = it.next().toString();
-                    value = (String) map.get(key);
-                    try {
-                        jsonParam.put(key, value);
-                    } catch (JSONException e) {
+                if (map != null) {
+                    Iterator it = map.keySet().iterator();
+
+                    while (it.hasNext()) {
+                        key = it.next().toString();
+                        value = (String) map.get(key);
+                        try {
+                            jsonParam.put(key, value);
+                        } catch (JSONException e) {
 // TODO Auto-generated catch block
-                        e.printStackTrace();
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                if (headers != null) {
+                    Iterator it1 = headers.keySet().iterator();
+                    while (it1.hasNext()) {
+                        key = it1.next().toString();
+                        value = (String) headers.get(key);
+                        post.setHeader(key, value);
                     }
                 }
                 StringEntity jsonentity = null;
@@ -153,6 +177,7 @@ public class HttpClientClass extends Thread {
                 jsonentity.setContentEncoding("UTF-8");
                 jsonentity.setContentType("application/json");
                 post.setEntity(jsonentity);
+
                 HttpResponse response = null;
                 try {
                     response = httpclient.execute(post);

@@ -54,18 +54,19 @@
         android:id="@+id/button1"
         android:layout_width="48dp"
         android:layout_height="32dp"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_toStartOf="@+id/amount"
+        android:layout_alignBottom="@+id/name"
+        android:layout_alignEnd="@+id/amount"
         android:text="下架"
         android:textSize="10sp" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="48dp"
-        android:layout_height="32dp"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_marginStart="-64dp"
-        android:layout_toEndOf="@+id/amount"
+        android:layout_width="42dp"
+        android:layout_height="22dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="21dp"
         android:background="#66b2e1"
         android:text="编辑"
         android:textSize="10sp" />
