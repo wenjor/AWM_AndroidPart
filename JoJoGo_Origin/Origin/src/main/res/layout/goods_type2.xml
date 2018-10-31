@@ -54,7 +54,7 @@
         android:id="@+id/button1"
         android:layout_width="48dp"
         android:layout_height="32dp"
-        android:layout_alignBottom="@+id/name"
+        android:layout_marginTop="16dp"
         android:layout_alignEnd="@+id/amount"
         android:text="下架"
         android:textSize="10sp" />

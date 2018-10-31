@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static java.lang.Thread.sleep;
+
 public class MainActivity extends Activity {
     private String ShopId;
     private Button bt1,bt2,bt3;
@@ -50,7 +52,7 @@ public class MainActivity extends Activity {
 //                    System.out.println("DDDDDDDDDDDDDDDD"+tokenid.getClass());
 //                    editor.putString("data",tokenid);
 //                    editor.putString("name","wenjor");
-                    Log.d("TAG", "Mainhandle saved json is "+ json);
+                    Log.d("TAG", "MainHandle saved json is "+ json);
                     editor.putString("alterShopInf",json);
                     editor.commit();
                     break;
@@ -83,7 +85,7 @@ public class MainActivity extends Activity {
 //                    System.out.println("DDDDDDDDDDDDDDDD"+tokenid.getClass());
 //                    editor.putString("data",tokenid);
 //                    editor.putString("name","wenjor");
-                    Log.d("TAG", "Mainhandle2 saved json is " + json);
+                    Log.d("TAG", "MainHandle2 saved json is " + json);
                     editor.putString("alterGoodInf", json);
                     editor.commit();
                     break;
@@ -92,11 +94,58 @@ public class MainActivity extends Activity {
                 }
         }
     };
+    private Handler handle3= new Handler(){
 
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    SharedPreferences sp = getSharedPreferences("LabelManager", Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(msg.obj);
+//                      Map<String,Object> map = new HashMap<String,Object>();
+//                    map = gson.fromJson((String)msg.obj,map.getClass());
+//                    Set<Map.Entry<String,Object>> set =map.entrySet();
+//                    for(Map.Entry<String,Object> me :set){
+//                        if(me.getValue() instanceof String)
+//                            editor.putString(me.getKey(),(String)me.getValue());
+//                        else if(me.getValue() instanceof Double)
+//                            editor.putFloat(me.getKey(),(float) ((Double) me.getValue()).doubleValue());
+//                    }
+//                    String tokenid =(String)map.get("data");
+//                    System.out.println("DDDDDDDDDDDDDDDD"+tokenid.getClass());
+//                    editor.putString("data",tokenid);
+//                    editor.putString("name","wenjor");
+                    Log.d("TAG", "MainHandle3 saved json is " + json);
+                    editor.putString("LabelManager", json);
+                    editor.commit();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //获得店铺id
+        SharedPreferences sp = getSharedPreferences("ShopId",Activity.MODE_PRIVATE);
+        String json = sp.getString("ShopId",null);
+        Log.d("ShopInfGGGGGGGGGGGGG",json);
+        Gson gson=new Gson(); Map<String,Object> map = new HashMap<String,Object>();
+        String ins = new String();
+        ins =gson.fromJson(json,ins.getClass());
+        map = gson.fromJson(ins,map.getClass());
+        ShopId =(new Double((double)map.get("data"))).intValue()+"";
+//                Map<String,Object> status =new HashMap<String, Object>();
+//                List<Map<String,Object>> list= new ArrayList<Map<String,Object>>();
+//                list = (ArrayList<Map<String,Object>>)map.get("data");
+//                status = list.get(0);int id = (new Double((double)status.get("id"))).intValue();
+
+
         bt1 = findViewById(R.id.button1);
         bt2 = findViewById(R.id.button2);
         bt3 = findViewById(R.id.button3);
@@ -113,22 +162,9 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                SharedPreferences sp = getSharedPreferences("ShopId",Activity.MODE_PRIVATE);
-                String json = sp.getString("ShopId",null);
-                Log.d("ShopInfGGGGGGGGGGGGG",json);
-                Gson gson=new Gson(); Map<String,Object> map = new HashMap<String,Object>();
-                String ins = new String();
-                ins =gson.fromJson(json,ins.getClass());
-                map = gson.fromJson(ins,map.getClass());
-                ShopId =(new Double((double)map.get("data"))).intValue()+"";
-//                Map<String,Object> status =new HashMap<String, Object>();
-//                List<Map<String,Object>> list= new ArrayList<Map<String,Object>>();
-//                list = (ArrayList<Map<String,Object>>)map.get("data");
-//                status = list.get(0);int id = (new Double((double)status.get("id"))).intValue();
-
-                //获得店铺id
+             //获取商品
                 String st = "http://nightwing.top:8080/shop/dishes/"+ShopId;//Log.d("ShopWebGGGGGGGGGGGGG",st);
-                  sp = getSharedPreferences("token",Activity.MODE_PRIVATE);
+                SharedPreferences sp = getSharedPreferences("token",Activity.MODE_PRIVATE);
                 String tokenid = sp.getString("data","");
                 Log.d("authorization",tokenid);
                 Map<String,Object> headers = new LinkedHashMap<String, Object>();
@@ -143,6 +179,25 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
                 httpclient.start();
+
+                //获取标签
+                st = "http://nightwing.top:8080/shop/cate/"+ShopId;//Log.d("ShopWebGGGGGGGGGGGGG",st);
+                try{
+                    httpclient = new HttpClientClass(st,
+                            "GET",
+                            "JSON",
+                            null,
+                            handle3, headers);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                httpclient.start();
+
+                try {
+                    sleep(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(MainActivity.this,Goods_manager.class);
                 startActivity(intent);
             }
@@ -166,7 +221,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void rightClick() {
-                String st = "http://nightwing.top:8080/shop/1?id=1";
+                String st = "http://nightwing.top:8080/shop/1?id="+ShopId;
                 Map<String,Object>map = new LinkedHashMap<String, Object>();
                 try{
                     httpclient = new HttpClientClass(st,"GET","JSON",map,handle, null);

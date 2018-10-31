@@ -64,14 +64,14 @@
     <RadioGroup
         android:id="@+id/radioGroup2"
         android:layout_width="79dp"
-        android:layout_height="213dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/radioGroup1"
         android:orientation="vertical">
 
         <RadioButton
             android:id="@+id/radioButton11"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:button="@null"
@@ -79,35 +79,7 @@
             android:text="全部"
             android:textColor="@color/radiobutton_textcolor" />
 
-        <RadioButton
-            android:id="@+id/radioButton22"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:text="休闲零食"
-            android:textColor="@color/radiobutton_textcolor" />
 
-        <RadioButton
-            android:id="@+id/radioButton33"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:text="方便速食"
-            android:textColor="@color/radiobutton_textcolor" />
-
-        <RadioButton
-            android:id="@+id/radioButton44"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:gravity="center"
-            android:text="生活日用"
-            android:textColor="@color/radiobutton_textcolor" />
     </RadioGroup>
 
     <ScrollView

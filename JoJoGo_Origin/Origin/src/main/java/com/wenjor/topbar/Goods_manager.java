@@ -6,9 +6,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
@@ -18,7 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Thread.sleep;
+
 public class Goods_manager extends Activity {
+    private RadioGroup radioGroup,radioGroup2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,8 +45,11 @@ public class Goods_manager extends Activity {
                 startActivity(intent);
             }
         });
+        radioGroup = findViewById(R.id.radioGroup);
+        radioGroup2 = findViewById(R.id.radioGroup2);
 
         int N;
+        //获得商品
         SharedPreferences sp = getSharedPreferences("GoodManager",MODE_PRIVATE);
         String json = sp.getString("alterGoodInf",null);
         Log.d("GoodManagerGGGGGGGGG",json);
@@ -51,8 +60,13 @@ public class Goods_manager extends Activity {
         Map<String,Object> status =new HashMap<String, Object>();
         List<Map<String,Object>> list= new ArrayList<Map<String,Object>>();
         list = (ArrayList<Map<String,Object>>)map.get("data");
-
         N= list.size();
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         LinearLayout LL = findViewById(R.id.LL);
 
@@ -63,6 +77,7 @@ public class Goods_manager extends Activity {
 //            String price =  status.get("price");
             String price = status.get("price").toString();
             String amount = (String)status.get("amount");
+            String cateId = (String)status.get("cateId").toString();
             Goods_type2 g =new Goods_type2(this);
             g.setImage(getResources().getDrawable(R.drawable.jin));
             g.setOnclickEdit(new View.OnClickListener() {
@@ -77,6 +92,37 @@ public class Goods_manager extends Activity {
 
             LL.addView(g);
 
+        }
+        //获得标签
+        sp = getSharedPreferences("LabelManager",MODE_PRIVATE);
+        json = sp.getString("LabelManager",null);
+        Log.d("GoodManagerGGGGGGGGG",json);
+         gson = new Gson();map =new HashMap<String, Object>();
+         ins = new String();
+        ins =gson.fromJson(json,ins.getClass());
+        map = gson.fromJson(ins,map.getClass());
+        status =new HashMap<String, Object>();
+        List<Map<String,Object>> list2= new ArrayList<Map<String,Object>>();
+        list2 = (ArrayList<Map<String,Object>>)map.get("data");
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        int N_L = list.size();
+        for(int i=0;i<N_L;i++){
+            status = list2.get(i);
+            String labelName = (String)status.get("name");
+            String labelId = status.get("id").toString();
+            RadioButton radioButton = new RadioButton(this);
+            RadioGroup.LayoutParams RP = new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,100);
+            //RP.setMargins(10, 10, 10, 10);
+            radioButton.setLayoutParams(RP);
+            radioButton.setText(labelName);
+            radioButton.setButtonDrawable(android.R.color.transparent);
+            radioButton.setGravity(Gravity.CENTER);
+            radioButton.setTextColor(getResources().getColorStateList(R.color.radiobutton_textcolor));
+            radioGroup2.addView(radioButton);
         }
 
 //        Goods_type2 good = findViewById(R.id.goods1);
