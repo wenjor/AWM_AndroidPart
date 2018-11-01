@@ -131,15 +131,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //获得店铺id
-        SharedPreferences sp = getSharedPreferences("ShopId",Activity.MODE_PRIVATE);
-        String json = sp.getString("ShopId",null);
-        Log.d("ShopInfGGGGGGGGGGGGG",json);
-        Gson gson=new Gson(); Map<String,Object> map = new HashMap<String,Object>();
-        String ins = new String();
-        ins =gson.fromJson(json,ins.getClass());
-        map = gson.fromJson(ins,map.getClass());
-        ShopId =(new Double((double)map.get("data"))).intValue()+"";
+
 //                Map<String,Object> status =new HashMap<String, Object>();
 //                List<Map<String,Object>> list= new ArrayList<Map<String,Object>>();
 //                list = (ArrayList<Map<String,Object>>)map.get("data");
@@ -161,10 +153,19 @@ public class MainActivity extends Activity {
         bt3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //获得店铺id
+                SharedPreferences sp = getSharedPreferences("ShopId",Activity.MODE_PRIVATE);
+                String json = sp.getString("ShopId",null);
+                Log.d("ShopInfGGGGGGGGGGGGG",json);
+                Gson gson=new Gson(); Map<String,Object> map = new HashMap<String,Object>();
+                String ins = new String();
+                ins =gson.fromJson(json,ins.getClass());
+                map = gson.fromJson(ins,map.getClass());
+                ShopId =(new Double((double)map.get("data"))).intValue()+"";
 
              //获取商品
                 String st = "http://nightwing.top:8080/shop/dishes/"+ShopId;//Log.d("ShopWebGGGGGGGGGGGGG",st);
-                SharedPreferences sp = getSharedPreferences("token",Activity.MODE_PRIVATE);
+                sp = getSharedPreferences("token",Activity.MODE_PRIVATE);
                 String tokenid = sp.getString("data","");
                 Log.d("authorization",tokenid);
                 Map<String,Object> headers = new LinkedHashMap<String, Object>();
@@ -194,7 +195,7 @@ public class MainActivity extends Activity {
                 httpclient.start();
 
                 try {
-                    sleep(0);
+                    sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -216,19 +217,37 @@ public class MainActivity extends Activity {
 //                httpclient.start();
                Intent intent = new Intent(MainActivity.this,Login.class);
                startActivity(intent);
-                // Toast.makeText(MainActivity.this,"On building",Toast.LENGTH_SHORT).show();
+
+
             }
 
             @Override
             public void rightClick() {
+                //获得店铺id
+                SharedPreferences sp = getSharedPreferences("ShopId",Activity.MODE_PRIVATE);
+                String json = sp.getString("ShopId",null);
+                Log.d("ShopInfGGGGGGGGGGGGG",json);
+                Gson gson=new Gson(); Map<String,Object> map = new HashMap<String,Object>();
+                String ins = new String();
+                ins =gson.fromJson(json,ins.getClass());
+                map = gson.fromJson(ins,map.getClass());
+                ShopId =(new Double((double)map.get("data"))).intValue()+"";
+                // Toast.makeText(MainActivity.this,"On building",Toast.LENGTH_SHORT).show();
+
+
                 String st = "http://nightwing.top:8080/shop/1?id="+ShopId;
-                Map<String,Object>map = new LinkedHashMap<String, Object>();
+                map = new LinkedHashMap<String, Object>();
                 try{
                     httpclient = new HttpClientClass(st,"GET","JSON",map,handle, null);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
                 httpclient.start();
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(MainActivity.this,Store_Information.class);
                 startActivity(intent);
 

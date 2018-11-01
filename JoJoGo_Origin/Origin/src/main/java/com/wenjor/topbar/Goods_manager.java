@@ -58,8 +58,8 @@ public class Goods_manager extends Activity {
         ins =gson.fromJson(json,ins.getClass());
         map = gson.fromJson(ins,map.getClass());
         Map<String,Object> status =new HashMap<String, Object>();
-        List<Map<String,Object>> list= new ArrayList<Map<String,Object>>();
-        list = (ArrayList<Map<String,Object>>)map.get("data");
+        final List<Map<String,Object>> list= //new ArrayList<Map<String,Object>>();
+                         (ArrayList<Map<String,Object>>)map.get("data");
         N= list.size();
         try {
             sleep(1000);
@@ -109,7 +109,7 @@ public class Goods_manager extends Activity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        int N_L = list.size();
+        int N_L = list2.size();
         for(int i=0;i<N_L;i++){
             status = list2.get(i);
             String labelName = (String)status.get("name");
@@ -122,6 +122,41 @@ public class Goods_manager extends Activity {
             radioButton.setButtonDrawable(android.R.color.transparent);
             radioButton.setGravity(Gravity.CENTER);
             radioButton.setTextColor(getResources().getColorStateList(R.color.radiobutton_textcolor));
+
+            radioButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LL.removeAllViews();
+                    for(int i=0;i<N;i++){
+                        Map<String,Object> status =list.get(i);
+                        String name = (String)status.get("name");
+//            String price =  status.get("price");
+                        String price = status.get("price").toString();
+                        String amount = (String)status.get("amount");
+                        String cateId = (String)status.get("cateId").toString();
+                        Goods_type2 g =new Goods_type2(Goods_manager.this);
+                        g.setImage(getResources().getDrawable(R.drawable.jin));
+                        g.setOnclickEdit(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(Goods_manager.this,Goods_edit.class);
+                                startActivity(intent);
+                            }
+                        });
+                        g.setGood(name,price,amount);
+                        LinearLayout.LayoutParams GoodP = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        if(cateId.equals(labelId)) {
+                            LL.addView(g);
+                            try {
+                                sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
+                }
+            });
             radioGroup2.addView(radioButton);
         }
 
