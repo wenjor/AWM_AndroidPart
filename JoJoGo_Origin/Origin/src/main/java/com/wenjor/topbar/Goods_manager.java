@@ -61,11 +61,11 @@ public class Goods_manager extends Activity {
         final List<Map<String,Object>> list= //new ArrayList<Map<String,Object>>();
                          (ArrayList<Map<String,Object>>)map.get("data");
         N= list.size();
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
 
         LinearLayout LL = findViewById(R.id.LL);
@@ -74,8 +74,7 @@ public class Goods_manager extends Activity {
         for(int i=0;i<N;i++){
             status =list.get(i);
             String name = (String)status.get("name");
-//            String price =  status.get("price");
-            String price = status.get("price").toString();
+            String price = ((double)status.get("price")/100)+"0";
             String amount = (String)status.get("amount");
             String cateId = (String)status.get("cateId").toString();
             Goods_type2 g =new Goods_type2(this);
@@ -83,6 +82,26 @@ public class Goods_manager extends Activity {
             g.setOnclickEdit(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+//                    SharedPreferences sp = getSharedPreferences("LabelManager", Activity.MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = sp.edit();
+//                    Gson gson = new Gson();
+//                    String json = gson.toJson(msg.obj);
+////                      Map<String,Object> map = new HashMap<String,Object>();
+////                    map = gson.fromJson((String)msg.obj,map.getClass());
+////                    Set<Map.Entry<String,Object>> set =map.entrySet();
+////                    for(Map.Entry<String,Object> me :set){
+////                        if(me.getValue() instanceof String)
+////                            editor.putString(me.getKey(),(String)me.getValue());
+////                        else if(me.getValue() instanceof Double)
+////                            editor.putFloat(me.getKey(),(float) ((Double) me.getValue()).doubleValue());
+////                    }
+////                    String tokenid =(String)map.get("data");
+////                    System.out.println("DDDDDDDDDDDDDDDD"+tokenid.getClass());
+////                    editor.putString("data",tokenid);
+////                    editor.putString("name","wenjor");
+//                    Log.d("TAG", "A singleGood saved json is " + json);
+//                    editor.putString("LabelManager", json);
+//                    editor.commit();
                     Intent intent = new Intent(Goods_manager.this,Goods_edit.class);
                     startActivity(intent);
                 }
@@ -104,11 +123,11 @@ public class Goods_manager extends Activity {
         status =new HashMap<String, Object>();
         List<Map<String,Object>> list2= new ArrayList<Map<String,Object>>();
         list2 = (ArrayList<Map<String,Object>>)map.get("data");
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         int N_L = list2.size();
         for(int i=0;i<N_L;i++){
             status = list2.get(i);
@@ -131,7 +150,8 @@ public class Goods_manager extends Activity {
                         Map<String,Object> status =list.get(i);
                         String name = (String)status.get("name");
 //            String price =  status.get("price");
-                        String price = status.get("price").toString();
+                        String price = ((double)status.get("price")/100)+"0";
+                       // String price = status.get("price").toString();
                         String amount = (String)status.get("amount");
                         String cateId = (String)status.get("cateId").toString();
                         Goods_type2 g =new Goods_type2(Goods_manager.this);
@@ -147,11 +167,11 @@ public class Goods_manager extends Activity {
                         LinearLayout.LayoutParams GoodP = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         if(cateId.equals(labelId)) {
                             LL.addView(g);
-                            try {
-                                sleep(100);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+//                            try {
+//                                sleep(100);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
                         }
 
                     }

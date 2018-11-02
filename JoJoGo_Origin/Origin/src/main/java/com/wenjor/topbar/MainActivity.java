@@ -194,11 +194,11 @@ public class MainActivity extends Activity {
                 }
                 httpclient.start();
 
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    sleep(1000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
                 Intent intent = new Intent(MainActivity.this,Goods_manager.class);
                 startActivity(intent);
             }

@@ -110,6 +110,7 @@ public class HttpClientClass extends Thread {
                     key = it1.next().toString();
                     value = (String) headers.get(key);
                     get.setHeader(key, value);
+                    Log.d("Here is Headers",key+" "+value);
                 }
             }
 
