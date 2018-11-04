@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
->
+    >
     <com.wenjor.topbar.Topbar
         android:id="@+id/topbar"
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
         android:src="@mipmap/jin" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editText100"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -42,26 +42,24 @@
         android:hint="Name" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/editText100"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="171dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Price" />
+        android:hint="Price"
+        android:inputType="number" />
 
     <EditText
-        android:id="@+id/editText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-150dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Stock" />
+        android:id="@+id/description"
+        android:layout_width="216dp"
+        android:layout_height="56dp"
+        android:layout_alignStart="@+id/editText100"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="99dp"
+        android:hint="Description" />
 
     <Button
         android:id="@+id/button"
@@ -80,4 +78,5 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="32dp"
         android:text="Supply" />
+
 </RelativeLayout>

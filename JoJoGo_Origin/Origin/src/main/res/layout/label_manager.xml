@@ -23,23 +23,25 @@
         custom:titleTextColor="#123412"
         custom:titleTextSize="8sp" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <ScrollView
+        android:id="@+id/SV"
+        android:layout_width="267dp"
 
-        android:layout_height="322dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="348dp"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="195dp">
-
-        <com.wenjor.topbar.Label
-            android:id="@+id/label1"
-            android:layout_width="263dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="169dp">
+        <LinearLayout
+            android:id="@+id/LL"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="62dp"
-            android:layout_marginTop="13dp" />
-    </RelativeLayout>
+            android:orientation="vertical">
+
+
+
+        </LinearLayout>
+    </ScrollView>
 
     <EditText
         android:id="@+id/textView3"

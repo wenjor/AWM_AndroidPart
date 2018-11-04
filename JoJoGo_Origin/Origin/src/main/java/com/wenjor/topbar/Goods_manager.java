@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -25,6 +26,7 @@ import static java.lang.Thread.sleep;
 
 public class Goods_manager extends Activity {
     private RadioGroup radioGroup,radioGroup2;
+    private FloatingActionButton FB;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +49,16 @@ public class Goods_manager extends Activity {
         });
         radioGroup = findViewById(R.id.radioGroup);
         radioGroup2 = findViewById(R.id.radioGroup2);
+        FB = findViewById(R.id.floatingActionButton);
+
+        FB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Goods_manager.this,Goods_adder.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         int N;
         //获得商品
@@ -60,6 +72,11 @@ public class Goods_manager extends Activity {
         Map<String,Object> status =new HashMap<String, Object>();
         final List<Map<String,Object>> list= //new ArrayList<Map<String,Object>>();
                          (ArrayList<Map<String,Object>>)map.get("data");
+        Good_inf gi =new Good_inf();
+        gi.name="JOJO";
+
+        Log.d("JOJO's here",gson.toJson(gi,gi.getClass()));
+
         N= list.size();
 //        try {
 //            sleep(1000);
@@ -73,10 +90,14 @@ public class Goods_manager extends Activity {
 
         for(int i=0;i<N;i++){
             status =list.get(i);
-            String name = (String)status.get("name");
-            String price = ((double)status.get("price")/100)+"0";
-            String amount = (String)status.get("amount");
-            String cateId = (String)status.get("cateId").toString();
+            Good_inf GioGio= new Good_inf();
+            String name = (String)status.get("name"); GioGio.name=name;
+            String price = ((double)status.get("price")/100)+"0";GioGio.price=price;
+            String amount = status.get("amount")+"";GioGio.status=status.get("status")+"";
+            String cateId = (String)status.get("cateId").toString();GioGio.cateId = cateId;
+            GioGio.description=status.get("description").toString();
+            GioGio.id=status.get("id").toString();
+
             Goods_type2 g =new Goods_type2(this);
             g.setImage(getResources().getDrawable(R.drawable.jin));
             g.setOnclickEdit(new View.OnClickListener() {
@@ -102,8 +123,17 @@ public class Goods_manager extends Activity {
 //                    Log.d("TAG", "A singleGood saved json is " + json);
 //                    editor.putString("LabelManager", json);
 //                    editor.commit();
+                    SharedPreferences spi = getSharedPreferences("singleGoodInf",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = spi.edit();
+                    Gson gson_inf=new Gson();
+                    String json = gson_inf.toJson(GioGio,GioGio.getClass());
+                    Log.d("singleGoodInf",json);
+                    editor.putString("singleGoodInf",json);
+                    editor.commit();
+
                     Intent intent = new Intent(Goods_manager.this,Goods_edit.class);
                     startActivity(intent);
+                    finish();
                 }
             });
             g.setGood(name,price,amount);
@@ -148,19 +178,29 @@ public class Goods_manager extends Activity {
                     LL.removeAllViews();
                     for(int i=0;i<N;i++){
                         Map<String,Object> status =list.get(i);
-                        String name = (String)status.get("name");
-//            String price =  status.get("price");
-                        String price = ((double)status.get("price")/100)+"0";
-                       // String price = status.get("price").toString();
-                        String amount = (String)status.get("amount");
-                        String cateId = (String)status.get("cateId").toString();
+                        Good_inf GioGio= new Good_inf();
+                        String name = (String)status.get("name"); GioGio.name=name;
+                        String price = ((double)status.get("price")/100)+"0";GioGio.price=price;
+                        String amount = status.get("amount")+"";GioGio.status=status.get("status")+"";
+                        String cateId = (String)status.get("cateId").toString();GioGio.cateId = cateId;
+                        GioGio.description=status.get("description").toString();
+                        GioGio.id=status.get("id").toString();
+
                         Goods_type2 g =new Goods_type2(Goods_manager.this);
                         g.setImage(getResources().getDrawable(R.drawable.jin));
                         g.setOnclickEdit(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                SharedPreferences spi = getSharedPreferences("singleGoodInf",MODE_PRIVATE);
+                                SharedPreferences.Editor editor = spi.edit();
+                                Gson gson_inf=new Gson();
+                                String json = gson_inf.toJson(GioGio,GioGio.getClass());
+                                Log.d("singleGoodInf",json);
+                                editor.putString("singleGoodInf",json);
+                                editor.commit();
                                 Intent intent = new Intent(Goods_manager.this,Goods_edit.class);
                                 startActivity(intent);
+                                finish();
                             }
                         });
                         g.setGood(name,price,amount);

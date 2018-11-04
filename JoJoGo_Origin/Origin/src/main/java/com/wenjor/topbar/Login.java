@@ -40,7 +40,6 @@ public class Login extends Activity {
                     Gson gson=new Gson(); Map<String,Object> map = new HashMap<String,Object>();
                     map = gson.fromJson((String)msg.obj,map.getClass());
                     String tokenid =(String)map.get("data");
-                   // String a=(String)(msg.obj);String b[] = a.split("\"msg\":\"success\",\"code\":0,\"data\":\"",2);String c[] = b[1].split("\\}",2);
                     System.out.println("DDDDDDDDDDDDDDDD"+tokenid);
                     editor.putString("data",tokenid);
                     editor.putString("name","wenjor2");
