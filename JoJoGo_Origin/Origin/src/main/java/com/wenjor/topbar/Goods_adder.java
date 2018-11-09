@@ -58,13 +58,13 @@ public class Goods_adder extends Activity {
                 Map<String,Object> gi_push = new HashMap<String, Object>();
                 if(!name.getText().toString().equals(""))gi_push.put("name",name.getText().toString());
                 if(!price.getText().toString().equals("")){
-
-                    gi_push.put("price",price.getText().toString());
+                    double aaa= Double.parseDouble(price.getText().toString())*100;
+                    gi_push.put("price",aaa);
                 }
                 if(!description.getText().toString().equals(""))gi_push.put("description",description.getText().toString());
-                if(supply.isSelected())gi_push.put("status","1");
-                else gi_push.put("status","0");
-                gi_push.put("cateId","1");
+                if(supply.isSelected())gi_push.put("status",1);
+                else gi_push.put("status",0);
+                gi_push.put("cateId",1);
 
                 String st ="http://nightwing.top:8080/dishes/create/1";
                 SharedPreferences sp = getSharedPreferences("token",Activity.MODE_PRIVATE);
@@ -72,6 +72,7 @@ public class Goods_adder extends Activity {
                 Log.d("authorization",tokenid);
                 Map<String,Object> headers = new LinkedHashMap<String, Object>();
                 headers.put("Authorization",tokenid);
+                headers.put("Content-Type","application/json");
 
                 HttpClientClass httpclient = null;
                 try {

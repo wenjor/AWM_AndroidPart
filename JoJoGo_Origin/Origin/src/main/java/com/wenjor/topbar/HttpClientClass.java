@@ -145,13 +145,13 @@ public class HttpClientClass extends Thread {
 // json数据类型进行提交
                 JSONObject jsonParam = new JSONObject();
                 String key;
-                String value;
+                Object value;
                 if (map != null) {
                     Iterator it = map.keySet().iterator();
 
                     while (it.hasNext()) {
                         key = it.next().toString();
-                        value = (String) map.get(key);
+                        value =  map.get(key);
                         try {
                             jsonParam.put(key, value);
                         } catch (JSONException e) {
@@ -164,8 +164,9 @@ public class HttpClientClass extends Thread {
                     Iterator it1 = headers.keySet().iterator();
                     while (it1.hasNext()) {
                         key = it1.next().toString();
-                        value = (String) headers.get(key);
-                        post.setHeader(key, value);
+                       // value = (String) headers.get(key);
+                        post.setHeader(key, (String) headers.get(key));
+
                     }
                 }
                 StringEntity jsonentity = null;
@@ -184,13 +185,15 @@ public class HttpClientClass extends Thread {
                     response = httpclient.execute(post);
                 } catch (IOException e) {
 // TODO Auto-generated catch block
-                    e.printStackTrace();System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+                    e.printStackTrace();
                 }
                 //System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
                 //if(response!=null)
+
                     if (response.getStatusLine().getStatusCode() == 200) {
 // 第五步：从相应对象当中取出数据，放到entity当中
                     System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+                    Log.d("TAG","XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
                     HttpEntity entity = response.getEntity();
                     BufferedReader reader = null;
                     try {

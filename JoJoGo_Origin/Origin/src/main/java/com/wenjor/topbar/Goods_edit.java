@@ -102,6 +102,7 @@ public class Goods_edit extends Activity {
                 Log.d("authorization",tokenid);
                 Map<String,Object> headers = new LinkedHashMap<String, Object>();
                 headers.put("Authorization",tokenid);
+
                 HttpClientClass httpclient = null;
                 try {
                     httpclient = new HttpClientClass(st,"POST","JSON",
