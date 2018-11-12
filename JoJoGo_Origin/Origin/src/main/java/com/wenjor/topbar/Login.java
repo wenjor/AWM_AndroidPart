@@ -135,11 +135,11 @@ public class Login extends Activity {
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-//                try {
-//                    sleep(2000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 synchronized (tokenid) {
                     httpclient.start();
                 }

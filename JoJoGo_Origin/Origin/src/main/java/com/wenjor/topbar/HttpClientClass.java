@@ -247,6 +247,17 @@ public class HttpClientClass extends Thread {
                 } // 将请求体放置到请求对象中
                 post.setEntity(requestEntity); // 执行请求对象 form表单的形式/
                 HttpResponse response = null;
+
+                if (headers != null) {
+                    Iterator it1 = headers.keySet().iterator();
+                    while (it1.hasNext()) {
+                        key = it1.next().toString();
+                        // value = (String) headers.get(key);
+                        post.setHeader(key, (String) headers.get(key));
+
+                    }
+                }
+
                 try {
                     response = httpclient.execute(post);
                 } catch (IOException e) {

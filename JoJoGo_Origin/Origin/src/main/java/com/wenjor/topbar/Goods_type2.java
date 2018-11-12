@@ -13,7 +13,7 @@ import android.widget.TextView;
 public class Goods_type2 extends RelativeLayout {
     private TextView name,price,amount;
     private Button bt1,bt2;
-    private ImageView image;
+    private MyInageView image;
     public Goods_type2(Context context){//, AttributeSet attrs){
         super(context);//,attrs);
         LayoutInflater.from(context).inflate(R.layout.goods_type2,this);
@@ -35,6 +35,7 @@ public class Goods_type2 extends RelativeLayout {
     public  void setImage(Drawable d){
         image.setImageDrawable(d);
     }
+    public  void setImageURL(String url){image.setImageURL(url);}
     public void setOnclickPull(OnClickListener listener){bt1.setOnClickListener(listener);}
     public void setOnclickEdit(OnClickListener listener){bt2.setOnClickListener(listener);}
 }

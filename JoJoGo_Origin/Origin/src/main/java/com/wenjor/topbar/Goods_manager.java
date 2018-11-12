@@ -1,9 +1,12 @@
 package com.wenjor.topbar;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
@@ -17,6 +20,10 @@ import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,8 +35,29 @@ public class Goods_manager extends Activity {
     private RadioGroup radioGroup,radioGroup2;
     private FloatingActionButton FB;
 
+
+
+    public static Drawable getDrawable(String urlpath){
+        Drawable drawable = null;
+        try {
+            URL url = new URL(urlpath);
+            URLConnection conn = url.openConnection();
+            conn.connect();
+            InputStream in;
+            in = conn.getInputStream();
+            drawable = Drawable.createFromStream(in, "background.jpg");
+        } catch (IOException e) {
+            e.printStackTrace();
+            //Log.d("DrawableProblem",urlpath);
+        }
+        return drawable;
+    }
+
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.goods_manager);
         Topbar topbar =findViewById(R.id.topbar);
@@ -99,7 +127,12 @@ public class Goods_manager extends Activity {
             GioGio.id=status.get("id").toString();
 
             Goods_type2 g =new Goods_type2(this);
-            g.setImage(getResources().getDrawable(R.drawable.jin));
+
+
+            String imgUrl=(String)status.get("img");
+            g.setImageURL(imgUrl);
+
+            //g.setImage(getResources().getDrawable(R.drawable.jin));
             g.setOnclickEdit(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

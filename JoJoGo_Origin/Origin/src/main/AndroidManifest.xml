@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.wenjor.topbar">
+    <uses-permission android:name="android.permission.CAMERA"/>//摄像头权限,SD卡读写权限
+   	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         android:allowBackup="true"
@@ -20,13 +28,19 @@
 
         </activity>
         <activity android:name=".OrderDetails"/>
-        <activity android:name=".Goods_manager"/>
+        <activity android:name=".Goods_manager">
+
+        </activity>
         <activity android:name=".Goods_edit"/>
         <activity android:name=".Store_Information"/>
         <activity android:name=".LabelManager"/>
         <activity android:name=".Login"
             android:exported="true" />
         <activity android:name=".Goods_adder"/>
+        <activity android:name=".TestOpenPhoneActivity">
+
+        </activity>
+
 
 
     </application>

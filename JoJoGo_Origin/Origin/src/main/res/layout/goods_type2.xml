@@ -5,7 +5,7 @@
     android:layout_height="140dp"
     android:layout_weight="1">
 
-    <ImageView
+    <com.wenjor.topbar.MyInageView
         android:id="@+id/imageView2"
         android:layout_width="105dp"
         android:layout_height="116dp"
