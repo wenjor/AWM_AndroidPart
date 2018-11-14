@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -26,6 +27,7 @@ import static java.lang.Thread.sleep;
 
 public class MainActivity extends Activity {
     private String ShopId;
+    private TextView tv;
     private Button bt1,bt2,bt3;
     private HttpClientClass httpclient;
     private Handler handle= new Handler(){
@@ -95,6 +97,7 @@ public class MainActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            Log.d("TAG", "MainHandle4 saved json is " + msg.obj);
             switch (msg.what) {
                 case 0:
                     SharedPreferences sp = getSharedPreferences("OrderManager", Activity.MODE_PRIVATE);
@@ -104,11 +107,7 @@ public class MainActivity extends Activity {
                     Log.d("TAG", "MainHandle4 saved json is " + json);
                     editor.putString("OrderManager", json);
                     editor.commit();
-                    try {
-                        sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+
                     break;
                 default:
                     break;
@@ -125,12 +124,33 @@ public class MainActivity extends Activity {
         bt1 = findViewById(R.id.button1);
         bt2 = findViewById(R.id.button2);
         bt3 = findViewById(R.id.button3);
+        tv = findViewById(R.id.textView);
         Topbar topbar = findViewById(R.id.topbar);
+
+        //尝试获取店铺信息
+        try{
+            SharedPreferences sp = getSharedPreferences("shopInf",MODE_PRIVATE);
+            String json = sp.getString("alterShopInf",null);
+            Log.d("TagGGGGGGGGGGGGG",json);
+            Gson gson=new Gson(); Map<String,Object> map = new HashMap<String,Object>();
+            String ins = new String();
+            ins =gson.fromJson(json,ins.getClass());
+            map = gson.fromJson(ins,map.getClass());
+            Map<String,Object> status =new HashMap<String, Object>();
+            List<Map<String,Object>> list= new ArrayList<Map<String,Object>>();
+            list = (ArrayList<Map<String,Object>>)map.get("data");
+            status = list.get(0);
+            tv.setText("       当前门店："+status.get("name")+"\n       地址： "+status.get("address"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //获得店铺id
+
                 SharedPreferences sp = getSharedPreferences("ShopId",Activity.MODE_PRIVATE);
                 String json = sp.getString("ShopId",null);
                 Log.d("ShopInfGGGGGGGGGGGGG",json);
@@ -139,6 +159,7 @@ public class MainActivity extends Activity {
                 ins =gson.fromJson(json,ins.getClass());
                 map = gson.fromJson(ins,map.getClass());
                 ShopId =(new Double((double)map.get("data"))).intValue()+"";
+
 
                 //获取订单
                 String st = "http://nightwing.top:8080/shop/getneworders/"+ShopId;//Log.d("ShopWebGGGGGGGGGGGGG",st);
@@ -243,7 +264,9 @@ public class MainActivity extends Activity {
                 String ins = new String();
                 ins =gson.fromJson(json,ins.getClass());
                 map = gson.fromJson(ins,map.getClass());
-                ShopId =(new Double((double)map.get("data"))).intValue()+"";
+                if (map.get("data") != null) {
+                    ShopId = (new Double((double) map.get("data"))).intValue() + "";
+                }
                 // Toast.makeText(MainActivity.this,"On building",Toast.LENGTH_SHORT).show();
 
 

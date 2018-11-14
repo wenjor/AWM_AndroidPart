@@ -90,8 +90,8 @@ public class Goods_manager extends Activity {
 
         int N;
         //获得商品
-        SharedPreferences sp = getSharedPreferences("OrderGoods",MODE_PRIVATE);
-        String json = sp.getString("OrderGoods",null);
+        SharedPreferences sp = getSharedPreferences("GoodManager",MODE_PRIVATE);
+        String json = sp.getString("alterGoodInf",null);
         Log.d("GoodManagerGGGGGGGGG",json);
         Gson gson = new Gson();Map<String,Object> map =new HashMap<String, Object>();
         String ins = new String();

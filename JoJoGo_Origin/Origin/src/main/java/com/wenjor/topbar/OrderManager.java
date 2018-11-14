@@ -93,6 +93,9 @@ public class OrderManager extends Activity {
         //获得订单
         SharedPreferences sp = getSharedPreferences("OrderManager", MODE_PRIVATE);
         String json = sp.getString("OrderManager", null);
+        if (json == null) {
+            return;
+        }
         Log.d("OrderManagerGGGGGGGGG", json);
         Gson gson = new Gson();
         Map<String, Object> map = new HashMap<String, Object>();

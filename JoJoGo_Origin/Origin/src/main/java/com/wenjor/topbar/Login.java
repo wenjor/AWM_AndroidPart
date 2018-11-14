@@ -39,7 +39,7 @@ public class Login extends Activity {
                    // Map<String,Object>map = (Map<String,Object>)msg.obj;
                     Gson gson=new Gson(); Map<String,Object> map = new HashMap<String,Object>();
                     map = gson.fromJson((String)msg.obj,map.getClass());
-                    String tokenid =(String)map.get("data");
+                    String tokenid =""+map.get("data");
                     System.out.println("DDDDDDDDDDDDDDDD"+tokenid);
                     editor.putString("data",tokenid);
                     editor.putString("name","wenjor2");
@@ -63,6 +63,27 @@ public class Login extends Activity {
                     String json = gson.toJson(msg.obj);
                     Log.d("TAG", "LoginHandle2 saved json is " + json);
                     editor.putString("ShopId", json);
+
+                    editor.commit();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+    private Handler handle3= new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    SharedPreferences sp = getSharedPreferences("shopInf",Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sp.edit();
+                    Gson gson=new Gson();
+                    String json = gson.toJson(msg.obj);
+
+                    Log.d("TAG", "LoginHandle3 saved json is "+ json);
+                    editor.putString("alterShopInf",json);
                     editor.commit();
                     break;
                 default:
@@ -100,8 +121,8 @@ public class Login extends Activity {
 //                    map.put("tel","13205586387");
 //                    map.put("password", "867149");
 //                }
-                map.put("tel","13205586387");
-                map.put("password", "867149");
+                map.put("tel","14581906515");
+                map.put("password", "B00066USKU");
                 try {
                     httpclient = new HttpClientClass(st,"POST","JSON",map,
                             handle, null);
@@ -129,7 +150,7 @@ public class Login extends Activity {
                     e.printStackTrace();
                 }
                 try {
-                    sleep(2000);
+                    sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -137,13 +158,39 @@ public class Login extends Activity {
                     httpclient.start();
                 }
 
-                 sp= getSharedPreferences("token",
+                sp= getSharedPreferences("token",
                         Activity.MODE_PRIVATE);
                 String data =sp.getString("data", "");
                 String name = sp.getString("name","");
                 System.out.println("AAAAAAAAAAAAAAAAAAAAAAAA"+name);
                 Toast.makeText(Login.this, "读取数据如下："+"\n"+"data：" + data ,
                         Toast.LENGTH_LONG).show();
+
+                try {
+                    sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //商店信息
+//                 sp = getSharedPreferences("ShopId",Activity.MODE_PRIVATE);
+//                String json = sp.getString("ShopId",null);
+//                Log.d("ShopInfGGGGGGGGGGGGG",json);
+//                Gson gson=new Gson(); map = new HashMap<String,Object>();
+//                String ins = new String();
+//                ins =gson.fromJson(json,ins.getClass());
+//                map = gson.fromJson(ins,map.getClass());
+//                String ShopId =(new Double((double)map.get("data"))).intValue()+"";
+//
+//
+//
+//                 st = "http://nightwing.top:8080/shop/1?id="+ShopId;
+//                map = new LinkedHashMap<String, Object>();
+//                try{
+//                    httpclient = new HttpClientClass(st,"GET","JSON",map,handle3, null);
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//                httpclient.start();
                 finish();
             }
         });

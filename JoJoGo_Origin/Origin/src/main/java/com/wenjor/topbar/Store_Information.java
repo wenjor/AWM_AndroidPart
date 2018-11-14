@@ -25,6 +25,7 @@ import java.util.Map;
 public class Store_Information extends Activity {
     private TextView userId,shopname,addr,createdAt;
     private ImageButton img;
+    private MyInageView myInageView;
     private Button confirm;
 
     @Override
@@ -32,6 +33,7 @@ public class Store_Information extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.store_information);
         Topbar topbar =findViewById(R.id.topbar);
+        //img = findViewById(R.id.imageButton2);
         topbar.setLeftIsvisable(true);
         topbar.setrightIsvisable(false);
         topbar.setOnTopbarClickListener(new Topbar.topbarClickListener() {
@@ -62,12 +64,19 @@ public class Store_Information extends Activity {
         addr =findViewById(R.id.addr);
         createdAt = findViewById(R.id.createdAt);
         confirm = findViewById(R.id.confirm);
-        img = findViewById(R.id.imageButton2);
+        //img = findViewById(R.id.imageButton2);
+        myInageView = findViewById(R.id.imageButton2);
 
         shopname.setText((String)status.get("name"));
         addr.setText((String)status.get("address"));
         createdAt.setText((String)status.get("createdAt"));
-        img.setImageResource(R.mipmap.activity);
+        //img.setImageResource(R.mipmap.activity);
+        try{
+            String imgUrl=(String)status.get("img");
+            myInageView.setImageURL(imgUrl);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
 
 
