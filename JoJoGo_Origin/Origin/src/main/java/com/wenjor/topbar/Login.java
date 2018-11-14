@@ -61,19 +61,6 @@ public class Login extends Activity {
                     SharedPreferences.Editor editor = sp.edit();
                     Gson gson = new Gson();
                     String json = gson.toJson(msg.obj);
-//                      Map<String,Object> map = new HashMap<String,Object>();
-//                    map = gson.fromJson((String)msg.obj,map.getClass());
-//                    Set<Map.Entry<String,Object>> set =map.entrySet();
-//                    for(Map.Entry<String,Object> me :set){
-//                        if(me.getValue() instanceof String)
-//                            editor.putString(me.getKey(),(String)me.getValue());
-//                        else if(me.getValue() instanceof Double)
-//                            editor.putFloat(me.getKey(),(float) ((Double) me.getValue()).doubleValue());
-//                    }
-//                    String tokenid =(String)map.get("data");
-//                    System.out.println("DDDDDDDDDDDDDDDD"+tokenid.getClass());
-//                    editor.putString("data",tokenid);
-//                    editor.putString("name","wenjor");
                     Log.d("TAG", "LoginHandle2 saved json is " + json);
                     editor.putString("ShopId", json);
                     editor.commit();
@@ -107,8 +94,14 @@ public class Login extends Activity {
                 //获得token
                 String st = "http://nightwing.top:8080/shop/login";
                 Map<String,Object>map = new LinkedHashMap<String, Object>();
-                map.put("tel","15725365670");
-                map.put("password", "B0001FGAO4");
+//                if(!uname.getText().equals("")&&!password.getText().equals("")){
+//                    map.put("tel",uname.getText());map.put("password",password.getText());
+//                }else{
+//                    map.put("tel","13205586387");
+//                    map.put("password", "867149");
+//                }
+                map.put("tel","13205586387");
+                map.put("password", "867149");
                 try {
                     httpclient = new HttpClientClass(st,"POST","JSON",map,
                             handle, null);

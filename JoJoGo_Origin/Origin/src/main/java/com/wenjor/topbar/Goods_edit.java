@@ -139,7 +139,7 @@ public class Goods_edit extends Activity {
                     File file=new File(imgPath);
                     FIU.uploadFile(file,url+ins,tokenid);
                 }
-                //finish();
+                finish();
             }
         });
 

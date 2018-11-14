@@ -103,7 +103,19 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="153dp"
         android:background="#3399FF"
-        android:text="确认送达"
+        android:text="确认接单"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp" />
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="69dp"
+        android:layout_height="23dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="153dp"
+        android:background="#3399FF"
+        android:text="完成订单"
         android:textColor="#FFFFFF"
         android:textSize="11sp" />
 

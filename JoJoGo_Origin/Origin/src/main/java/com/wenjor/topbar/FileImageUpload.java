@@ -60,7 +60,7 @@ public class FileImageUpload {
                 sb.append(LINE_END);
                 dos.write(sb.toString().getBytes());
                 InputStream is = new FileInputStream(file);
-                byte[] bytes = new byte[1024];
+                byte[] bytes = new byte[5000000];
                 int len = 0;
                 while((len=is.read(bytes))!=-1)
                 {
@@ -75,7 +75,9 @@ public class FileImageUpload {
                  * 获取响应码 200=成功
                  * 当响应成功，获取响应的流
                  */
+                conn.connect();
                 int res = conn.getResponseCode();
+                String msg = conn.getResponseMessage();
                 Log.d(TAG, "response code:"+res);
                 if(res==200)
                 {

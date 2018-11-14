@@ -11,14 +11,12 @@ import android.widget.TextView;
 
 public class Order_m extends RelativeLayout {
     private TextView uname,tel,addr,orderTime,orderNum,price,turn;
-    private Button confirm,detail;
+    private Button confirm,detail,finish;
     private ImageButton call;
+
+
     public Order_m(Context context){
         super(context);
-    }
-
-    public Order_m(Context context, AttributeSet attrs){
-        super(context,attrs);
         LayoutInflater.from(context).inflate(R.layout.order_for_m,this);
         uname = (TextView)findViewById(R.id.uname);
         tel = (TextView)findViewById(R.id.Tel);
@@ -28,8 +26,10 @@ public class Order_m extends RelativeLayout {
         price = (TextView)findViewById(R.id.price);
         turn = (TextView)findViewById(R.id.turn);
 
-        confirm = (Button)findViewById(R.id.button7);
+        confirm = (Button)findViewById(R.id.button7);confirm.setVisibility(View.INVISIBLE);
         detail = (Button)findViewById(R.id.detail);
+        finish = (Button)findViewById(R.id.button8);finish.setVisibility(View.INVISIBLE);
+
         call = (ImageButton)findViewById(R.id.imageButton);
 
     }
@@ -48,6 +48,19 @@ public class Order_m extends RelativeLayout {
 
     public void setOnclickConfirm(OnClickListener listener){
         confirm.setOnClickListener(listener);
+    }
+
+    public void finishButtonVisible(){
+        finish.setVisibility(View.VISIBLE);
+        confirm.setVisibility(View.GONE);
+    }
+
+    public void allButtonInvisible(){
+        finish.setVisibility(View.GONE);confirm.setVisibility(View.GONE);
+    }
+
+    public void setOnclickFinish(OnClickListener listener){
+        finish.setOnClickListener(listener);
     }
 
     public void setOnclickDetail(OnClickListener listener){
