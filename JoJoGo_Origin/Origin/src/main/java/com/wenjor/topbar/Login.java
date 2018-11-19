@@ -121,8 +121,10 @@ public class Login extends Activity {
 //                    map.put("tel","13205586387");
 //                    map.put("password", "867149");
 //                }
-                map.put("tel","14581906515");
-                map.put("password", "B00066USKU");
+                map.put("tel","15725365670");
+//                map.put("tel","17720429416");
+                map.put("password", "B0001FGAO4");
+//                map.put("password", "B000AA5SMU");
                 try {
                     httpclient = new HttpClientClass(st,"POST","JSON",map,
                             handle, null);

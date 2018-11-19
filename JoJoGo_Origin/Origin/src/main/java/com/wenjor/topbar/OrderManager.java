@@ -93,9 +93,6 @@ public class OrderManager extends Activity {
         //获得订单
         SharedPreferences sp = getSharedPreferences("OrderManager", MODE_PRIVATE);
         String json = sp.getString("OrderManager", null);
-        if (json == null) {
-            return;
-        }
         Log.d("OrderManagerGGGGGGGGG", json);
         Gson gson = new Gson();
         Map<String, Object> map = new HashMap<String, Object>();
@@ -103,6 +100,9 @@ public class OrderManager extends Activity {
         ins = gson.fromJson(json, ins.getClass());
         map = gson.fromJson(ins, map.getClass());
         Map<String, Object> status = new HashMap<String, Object>();
+        if (map == null || map.get("data") == null) {
+            return;
+        }
         final List<Map<String, Object>> list = //new ArrayList<Map<String,Object>>();
                 (ArrayList<Map<String, Object>>) map.get("data");
 
@@ -111,11 +111,12 @@ public class OrderManager extends Activity {
         for (int i = 0; i < N; i++) {
             status = list.get(i);
             Order_m order_m = new Order_m(this);
-            order_m.setTurn("" + status.get("id"));
+            order_m.setTurn((i+1)+"");//("" + (int)(double)status.get("id"));
             int intId = (int)(double)status.get("id");
             String id = intId+"";
-            order_m.setText("" + status.get("userId"), "",
-                    "" + status.get("address"),
+            String []info = status.get("address").toString().split("\\+");
+            order_m.setText(info[0] + status.get("userId"), info[1],
+                    info[2],
                     (String) status.get("deliveryDate") + status.get("deliveryTime"),
                     "" + status.get("id"), "" + status.get("price"));
 

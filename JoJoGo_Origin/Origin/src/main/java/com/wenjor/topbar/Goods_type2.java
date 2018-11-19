@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -38,4 +39,5 @@ public class Goods_type2 extends RelativeLayout {
     public  void setImageURL(String url){image.setImageURL(url);}
     public void setOnclickPull(OnClickListener listener){bt1.setOnClickListener(listener);}
     public void setOnclickEdit(OnClickListener listener){bt2.setOnClickListener(listener);}
+    public  void removeImage(){image.setVisibility(View.GONE);}
 }

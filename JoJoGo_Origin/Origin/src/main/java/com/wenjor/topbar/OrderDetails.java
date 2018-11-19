@@ -27,11 +27,17 @@ public class OrderDetails extends Activity{
         //获得商品
         SharedPreferences sp = getSharedPreferences("OrderGoods",MODE_PRIVATE);
         String json = sp.getString("OrderGoods",null);
+        if (json == null) {
+            return;
+        }
         Log.d("GoodManagerGGGGGGGGG",json);
         Gson gson = new Gson();Map<String,Object> map =new HashMap<String, Object>();
         String ins = new String();
         ins =gson.fromJson(json,ins.getClass());
         map = gson.fromJson(ins,map.getClass());
+        if (map == null || map.get("data") == null) {
+            return;
+        }
         Map<String,Object> status =new HashMap<String, Object>();
         final List<Map<String,Object>> list= //new ArrayList<Map<String,Object>>();
                 (ArrayList<Map<String,Object>>)map.get("data");
@@ -45,16 +51,17 @@ public class OrderDetails extends Activity{
             status =list.get(i);
             ;
             String name = (String)status.get("name");
-            String price = ((double)status.get("price")/100)+"0";
-            String amount = status.get("num")+"";
-            String cateId = (String)status.get("cateId").toString();
+            String price = ((double)status.get("price"))+"0";
+            String amount = "X"+(int)(double)status.get("num")+"";
+            String cateId = status.get("cateId")+"";
 
 
             Goods_type2 g =new Goods_type2(this);
 
 
-            String imgUrl=(String)status.get("img");
-            g.setImageURL(imgUrl);
+            //String imgUrl=(String)status.get("img");
+            //g.setImageURL(imgUrl);
+            g.removeImage();
 
             //g.setImage(getResources().getDrawable(R.drawable.jin));
 

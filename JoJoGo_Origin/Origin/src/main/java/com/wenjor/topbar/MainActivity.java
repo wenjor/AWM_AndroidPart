@@ -161,8 +161,8 @@ public class MainActivity extends Activity {
                 ShopId =(new Double((double)map.get("data"))).intValue()+"";
 
 
-                //获取订单
-                String st = "http://nightwing.top:8080/shop/getneworders/"+ShopId;//Log.d("ShopWebGGGGGGGGGGGGG",st);
+                //获取订单///shop/{shop_id}/getorders/1
+                String st = "http://nightwing.top:8080/shop/"+ShopId+"/getorders/1";//Log.d("ShopWebGGGGGGGGGGGGG",st);
                 sp = getSharedPreferences("token",Activity.MODE_PRIVATE);
                 String tokenid = sp.getString("data","");
                 Log.d("authorization",tokenid);

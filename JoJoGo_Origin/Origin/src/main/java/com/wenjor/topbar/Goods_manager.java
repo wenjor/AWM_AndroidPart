@@ -97,6 +97,9 @@ public class Goods_manager extends Activity {
         String ins = new String();
         ins =gson.fromJson(json,ins.getClass());
         map = gson.fromJson(ins,map.getClass());
+        if (map == null || map.get("data") == null) {
+            return;
+        }
         Map<String,Object> status =new HashMap<String, Object>();
         final List<Map<String,Object>> list= //new ArrayList<Map<String,Object>>();
                          (ArrayList<Map<String,Object>>)map.get("data");

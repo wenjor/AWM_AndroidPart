@@ -26,7 +26,7 @@ public class Order_m extends RelativeLayout {
         price = (TextView)findViewById(R.id.price);
         turn = (TextView)findViewById(R.id.turn);
 
-        confirm = (Button)findViewById(R.id.button7);confirm.setVisibility(View.INVISIBLE);
+        confirm = (Button)findViewById(R.id.button7);confirm.setVisibility(View.VISIBLE);
         detail = (Button)findViewById(R.id.detail);
         finish = (Button)findViewById(R.id.button8);finish.setVisibility(View.INVISIBLE);
 
